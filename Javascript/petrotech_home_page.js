@@ -1,15 +1,19 @@
-
 let currentRow = 0;
+
+//Slideshow variable
 const slideshows = {
    slideshow1: {
        currentRow: 0,
        rows: document.querySelectorAll("#slideshowtable tr")
    }
 }
+
+//Show row function
 function showRow(slideshowId, index) {
 hideRowsExceptCurrent(slideshowId, index);
 }
 
+//Next row function
 function nextRow(slideshowId) {
    const slideshow = slideshows[slideshowId];
    if (slideshow.currentRow < slideshow.rows.length - 1) {
@@ -20,6 +24,7 @@ function nextRow(slideshowId) {
    showRow(slideshowId, slideshow.currentRow);
 }
 
+//Previous row function
 function previousRow(slideshowId) {
    const slideshow = slideshows[slideshowId];
    if (slideshow.currentRow > 0) {
@@ -30,35 +35,39 @@ function previousRow(slideshowId) {
    showRow(slideshowId, slideshow.currentRow);
 }
 
+//Start slideshow function
 function startSlideshow(slideshowId, interval) {
 setInterval(() => nextRow(slideshowId), interval);
 }
 
+//Hide rows function
 function hideRowsExceptCurrent(slideshowId, currentIndex) {
-const slideshow = slideshows[slideshowId];
-slideshow.rows.forEach((row, i) => {
-   const message = row.querySelector(".message");
-   const orderbuttoncontainer = row.querySelector(".orderbuttoncontainer");
-   row.classList.remove("fade-in");
-   message.classList.remove("expand-width");
-   row.style.display = i === currentIndex ? "" : "none";
-   if (i === currentIndex) {
-       // Adding the fade-in class for the current row
-       row.classList.add("fade-in");
-       // Add the fade-in class for the order button container
-       orderbuttoncontainer.classList.add("fade-in");
-        // Adding the expand-width animation for the message
-       message.classList.add("expand-width");
-       }
-});
-}   
+    const slideshow = slideshows[slideshowId];
+    slideshow.rows.forEach((row, i) => {
+    const message = row.querySelector(".message");
+    const orderbuttoncontainer = row.querySelector(".orderbuttoncontainer");
+    row.classList.remove("fade-in");
+    message.classList.remove("expand-width");
+    row.style.display = i === currentIndex ? "" : "none";
+    if (i === currentIndex) {
+        // Adding the fade-in class for the current row
+        row.classList.add("fade-in");
+        // Add the fade-in class for the order button container
+        orderbuttoncontainer.classList.add("fade-in");
+            // Adding the expand-width animation for the message
+        message.classList.add("expand-width");
+        }
+    });
+}
 
 // Initialize the first row as visible
 Object.keys(slideshows).forEach(slideshowId => {
    showRow(slideshowId, 0);
    startSlideshow(slideshowId, 10000); // Change slide every 5 seconds
-  
+
 });
+
+//Services search variables
 const services = [
    { name: "Home", url: "index.html" },
    { name: "Casing and Tubing", url: "petrotech_casing_and_tubing_page.html" },
@@ -90,10 +99,11 @@ const services = [
    { name: "Control", url: "petrotech_safety_and_control_equipment_page.html" },
    { name: "Surface", url: "petrotech_surface_equipment_page.html" },
    { name: "Christmas Trees", url: "petrotech_wellheads_and_christmas_trees_page.html" }
-   
-   
+
+
 ];
 
+//Search Services function
 function searchServices() {
    const input = document.getElementById("searchbar").value.toLowerCase();
    const resultsDiv = document.getElementById("search-results");
@@ -118,6 +128,7 @@ function searchServices() {
    }
 }
 
+//Add event listeners
 document.addEventListener('DOMContentLoaded', function() {
    const missionStatement = document.querySelector('.missionstatement');
    const dropdownMissionStatement = document.querySelector('.dropdownmissionstatement');
@@ -137,9 +148,6 @@ document.addEventListener('DOMContentLoaded', function() {
    const goalsFooter = document.querySelector('.goalsfooter');
    const dropdownGoalsfooter = document.querySelector('.dropdowngoalsfooter');
 
-
-
-
    missionStatement.addEventListener('mouseenter', function() {
        const rect = missionStatement.getBoundingClientRect();
        dropdownMissionStatement.style.display = 'block';
@@ -147,7 +155,7 @@ document.addEventListener('DOMContentLoaded', function() {
        dropdownMissionStatement.offsetHeight;
 
        dropdownMissionStatement.style.height = '500px'; // Set to desired height
-       
+
    });
 
    missionStatement.addEventListener('mouseleave', function() {
@@ -165,7 +173,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
        dropdownHistory.style.height = '500px'; // Set to desired height
 
-       
+
    });
 
    history.addEventListener('mouseleave', function() {
@@ -192,16 +200,6 @@ document.addEventListener('DOMContentLoaded', function() {
    }, 300); // Timeout matches the duration of the transition
    });
 
-
-
-
-
-
-
-
-
-
-
    missionStatementfooter.addEventListener('mouseenter', function() {
        const rect = missionStatementfooter.getBoundingClientRect();
        dropdownMissionstatementFooter.style.display = 'block';
@@ -226,7 +224,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
        dropdownHistoryfooter.style.height = '450px'; // Set to desired height
 
-       
+
    });
 
    historyFooter.addEventListener('mouseleave', function() {
@@ -252,10 +250,5 @@ document.addEventListener('DOMContentLoaded', function() {
        dropdownGoalsfooter.style.display = 'none';
    }, 300); // Timeout matches the duration of the transition
    });
-
-
-
-
-   
 
 });
